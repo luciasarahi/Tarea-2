@@ -5,6 +5,7 @@
 using namespace std;
 
 int cont, medida, o;
+bool bien = false;
 
 struct alumnos {
 	string nombre;
@@ -12,10 +13,11 @@ struct alumnos {
 	int matricula;
 	string n;
 	string tel;
-	char correo[50];
+	string correo;
 	string colonia;
 	string calle;
-	double cal1 = 0, cal2 = 0, cal3 = 0, calfinal;
+	float cal1 = 0, cal2 = 0, cal3 = 0;
+	float calfinal;
 
 };
 alumnos al[100];
@@ -64,7 +66,7 @@ void main() {
 	}
 
 	system("cls");
-	cout << "¡Hola!, bienvenido al menú principal";
+	cout << "¡Hola!, bienvenido al menú principal.";
 	system("pause>null");
 	otravez();
 }
@@ -75,11 +77,11 @@ void alumno() {
 	cin.ignore();
 	cout << "Estas en el area para introducir los datos del estudiante" << endl << endl;
 
-	cout << "Ingresa el nombre: ";
+	cout << "Ingresa el(los) nombre(s): ";
 	getline(cin, al[cont].nombre);
-	cout << "Ingresa el apellido: ";
+	cout << "Ingresa el(los) apellido(s): ";
 	getline(cin, al[cont].apellido);
-	cout << "Ingresa la matricula: ";
+	cout << "Ingresa la matrícula: ";
 	cin >> al[cont].matricula;
 	cin.ignore();
 	cout << "Ingresa su numero de contacto: ";
@@ -88,61 +90,95 @@ void alumno() {
 	medida = al[cont].tel.size();
 	while (medida < 8 || medida > 12) {
 
-		cout << "El teléfono debe tener al menos 8 digitos y ser menor a 12." << endl;
+		cout << "El teléfono debe tener al menos 8 digitos y ser menor a 12. Ingresa de nuevo el numero de contacto: " << endl;
 		getline(cin, al[cont].tel);
 		medida = al[cont].tel.size();
 	}
 
 	cin.ignore();
 	cout << "Ingresa su correo electronico: ";
-	cin >> al[cont].correo;
+	getline(cin, al[cont].correo);
 
-	int countAt = 0, countDot = 0;
-	for (int i = 0; al[cont].correo[i] != NULL; i++) {
+	medida = al[cont].correo.size();
+	int countAr = 0, countCOM = 0;
+	for (int i = 1; i <= medida; i++) {
 
-		if (al[cont].correo[i] == '@') {
-			countAt++;
+		if (al[cont].correo[i] == 64) {
+			countAr = 1;
 		}
-		if (al[cont].correo[i] == '.') {
-			countDot++;
+
+		if (al[cont].correo[medida - 4] == 46 && al[cont].correo[medida - 3] == 99 && al[cont].correo[medida - 2] == 111 && al[cont].correo[medida - 1] == 109) {
+			countCOM = 1;
 		}
-		if (al[cont].correo[i] == 'c') {
-			countDot++;
+		if (countAr == 1 && countCOM == 1) {
+			bien = true;
 		}
-		if (al[cont].correo[i] == 'o') {
-			countDot++;
-		}
-		if (al[cont].correo[i] == 'm') {
-			countDot++;
-		}
-	}
-	if (countAt == 0) {
-		cout << "No pusiste @. Por favor vuelve a ingresar el correo electronico. " << endl;
-		cin >> al[cont].correo;
-	}
-	if (countDot < 4) {
-		cout << "Falta uno de los elementos del .com. Por favor vuelve a escribir el correo electronico. " << endl;
-		cin >> al[cont].correo;
+
 	}
 
+	while (bien = false) {
+		cout << "Te falta alguno de los elementos: @ o .com. Por favor vuelve a introducir el correo electronico: ";
+		getline(cin, al[cont].correo);
+		medida = al[cont].correo.size();
+		countAr = 0;
+		countCOM = 0;
+		for (int i = 1; i <= medida; i++) {
+
+			if (al[cont].correo[i] == 64) {
+				countAr = 1;
+			}
+
+			if (al[cont].correo[medida - 4] == 46 && al[cont].correo[medida - 3] == 99 && al[cont].correo[medida - 2] == 111 && al[cont].correo[medida - 1] == 109) {
+				countCOM = 1;
+			}
+			if (countAr == 1 && countCOM == 1) {
+				bien = true;
+			}
+
+		}
+
+	}
 
 	cin.ignore();
-	cout << "Ingresa su direccion, colonia: ";
+	cout << "Ingresa su dirección, colonia: ";
 	getline(cin, al[cont].colonia);
 	cout << "Calle: ";
 	getline(cin, al[cont].calle);
 	cout << "Numero de casa: ";
 	getline(cin, al[cont].n);
-	cout << "Ingresa sus tres calificaciones, calificacion 1: ";
+
+	cout << "Ingresa sus tres calificaciones, calificación 1: ";
 	cin >> al[cont].cal1;
-	cout << "Calificacion 2: ";
+	if (al[cont].cal2 > 100 || al[cont].cal2 < 0) {
+		cout << "Los valores que ha imgresado no son validos. Por favor asegurese que la calificacion este comprendida entre 0 y 100. Vuelve a introducir la calificación: " << endl;
+		cin >> al[cont].cal1;
+	}
+
+	cout << "Calificación 2: ";
 	cin >> al[cont].cal2;
-	cout << "Calificacion 3: ";
+	if (al[cont].cal2 > 100 || al[cont].cal2 < 0) {
+		cout << "Los valores que ha imgresado no son validos. Por favor asegurese que la calificacion este comprendida entre 0 y 100. Vuelve a introducir la calificación: " << endl;
+		cin >> al[cont].cal2;
+	}
+
+	cout << "Calificación 3: ";
 	cin >> al[cont].cal3;
+	if (al[cont].cal2 > 100 || al[cont].cal2 < 0) {
+		cout << "Los valores que ha imgresado no son validos. Por favor asegurese que la calificacion este comprendida entre 0 y 100. Vuelve a introducir la calificación: " << endl;
+		cin >> al[cont].cal3;
+	}
 
-	al[cont].calfinal = ((al[cont].cal1 * .30) + (al[cont].cal2 * .45) + (al[cont].cal3 * .25)) / 3;
+	if (al[cont].cal1 < 0 || al[cont].cal2 < 0 || al[cont].cal3 < 0) {
 
-	cout << "Se ha guardado un alumno" << endl << endl;
+		al[cont].calfinal = 0;
+	}
+
+	else {
+
+		al[cont].calfinal = (al[cont].cal1 * 30) / 100 + (al[cont].cal2 * 45) / 100 + (al[cont].cal3 * 25) / 100;
+	}
+	cout << "Promedio: " << al[cont].calfinal;
+
 	cont++;
 	guardar();
 
@@ -227,11 +263,12 @@ void mostrar() {
 	cout << "Aqui se muestran todos los alumnos y su información respectiva que se ha guardado." << endl << endl;
 	for (int i = 0; i < cont; i++) {
 		cout << "Nombre y apellido: " << al[i].nombre << " " << al[i].apellido << endl;
-		cout << "Matricula: " << al[i].matricula << endl;
+		cout << "Matrícula: " << al[i].matricula << endl;
 		cout << "Correo electronico: " << al[i].correo << endl;
 		cout << "Numero de contacto: " << al[i].tel << endl;
 		cout << "Direccion: Colonia " << al[i].colonia << " ,Calle " << al[i].calle << " ,Numero " << al[i].n << endl;
-		cout << "Calificacion: " << al[cont].calfinal << endl;
+		cout << "Calificaciones: " << al[i].cal1 << ", " << al[i].cal2 << ", " << al[i].cal3 << endl;
+		cout << "Promedio: " << al[i].calfinal << endl;
 	}
 
 	system("pause > nul");
@@ -244,7 +281,7 @@ void buscarma() {
 	system("cls");
 	int matri;
 	cout << "Estas en el buscador" << endl << endl;
-	cout << "Ingresa la matricula de la persona que buscas: ";
+	cout << "Ingresa la matrícula de la persona que buscas: ";
 	cin >> matri;
 	bool encontrado = false;
 
@@ -257,7 +294,8 @@ void buscarma() {
 			cout << "Correo electronico: " << al[i].correo << endl;
 			cout << "Numero de contacto: " << al[i].tel << endl;
 			cout << "Direccion: Colonia " << al[i].colonia << " ,Calle " << al[i].calle << " ,Numero " << al[i].n << endl;
-			cout << "Calificacion: " << al[cont].calfinal << endl;
+			cout << "Calificaciones: " << al[i].cal1 << ", " << al[i].cal2 << ", " << al[i].cal3 << endl;
+			cout << "Promedio: " << al[i].calfinal << endl;
 
 			encontrado = true;
 			break;
@@ -294,7 +332,8 @@ void modificar() {
 			cout << "Correo electronico: " << al[i].correo << endl;
 			cout << "Numero de contacto: " << al[i].tel << endl;
 			cout << "Direccion: Colonia " << al[i].colonia << " ,Calle " << al[i].calle << " ,Numero " << al[i].n << endl;
-			cout << "Calificacion: " << al[cont].calfinal << endl;
+			cout << "Calificaciones: " << al[i].cal1 << ", " << al[i].cal2 << ", " << al[i].cal3 << endl;
+			cout << "Promedio: " << al[i].calfinal << endl;
 
 			cout << "¿Que deseas modificar?" << endl;
 			cout << "1. Matrícula \n2. Nombre \n3. Apellido \n4. Correo Electronico\n5. Telefono \n6. Dirección \n7. Calificaciones \n0. Nada" << endl;
@@ -315,7 +354,7 @@ void modificar() {
 				break;
 			case 4:
 				cout << "Ingresa el nuevo correo: ";
-				cin >> al[i].correo;
+				getline(cin, al[cont].correo);
 				break;
 			case 5:
 				cout << "Ingresa el nuevo telefono: ";
@@ -353,20 +392,20 @@ void modificar() {
 				case 1:
 					cin.ignore();
 					cout << "Ingresa la nueva Calificación 1 : ";
-					cin >> al[cont].cal1;
-					al[cont].calfinal = ((al[cont].cal1 * .30) + (al[cont].cal2 * .45) + (al[cont].cal3 * .25) / 3);
+					cin >> al[i].cal1;
+					al[i].calfinal = ((al[i].cal1 * .30) + (al[i].cal2 * .45) + (al[i].cal3 * .25) / 3);
 					break;
 				case 2:
 					cin.ignore();
 					cout << "Ingresa la nueva Calificación 3: ";
 					cin >> al[cont].cal2;
-					al[cont].calfinal = ((al[cont].cal1 * .30) + (al[cont].cal2 * .45) + (al[cont].cal3 * .25) / 3);
+					al[i].calfinal = ((al[i].cal1 * .30) + (al[i].cal2 * .45) + (al[i].cal3 * .25) / 3);
 					break;
 				case 3:
 					cin.ignore();
 					cout << "Ingresa la nueva Calificación 3: ";
-					cin >> al[cont].cal3;
-					al[cont].calfinal = ((al[cont].cal1 * .30) + (al[cont].cal2 * .45) + (al[cont].cal3 * .25) / 3);
+					cin >> al[i].cal3;
+					al[i].calfinal = ((al[i].cal1 * .30) + (al[i].cal2 * .45) + (al[i].cal3 * .25) / 3);
 					break;
 				default:
 					break;
@@ -383,7 +422,8 @@ void modificar() {
 				cout << "Correo electronico: " << al[i].correo << endl;
 				cout << "Numero de contacto: " << al[i].tel << endl;
 				cout << "Direccion: Colonia " << al[i].colonia << " ,Calle " << al[i].calle << " ,Numero " << al[i].n << endl;
-				cout << "Calificacion: " << al[cont].calfinal << endl;
+				cout << "Calificaciones: " << al[i].cal1 << ", " << al[i].cal2 << ", " << al[i].cal3 << endl;
+				cout << "Promedio: " << al[i].calfinal << endl;
 			}
 			else {
 				cout << "No se realizó ninguna modificación." << endl;
@@ -418,7 +458,8 @@ void eliminar() {
 			cout << "Correo electronico: " << al[i].correo << endl;
 			cout << "Numero de contacto: " << al[i].tel << endl;
 			cout << "Direccion: Colonia " << al[i].colonia << " ,Calle " << al[i].calle << " ,Numero " << al[i].n << endl;
-			cout << "Calificacion: " << al[cont].calfinal << endl;
+			cout << "Calificaciones: " << al[i].cal1 << ", " << al[i].cal2 << ", " << al[i].cal3 << endl;
+			cout << "Promedio: " << al[i].calfinal << endl;
 
 			cout << "¿Seguro que desea eliminar a " << al[i].matricula << "?" << endl;
 			cout << "1. Si \n2. No" << endl;
@@ -471,7 +512,7 @@ void guardarARCH() {
 	ofstream archivo;
 
 	// Se guarda como binario
-	archivo.open("Datos de Alumnos.csv");
+	archivo.open("Datos de Alumnos.txt");
 
 	for (int i = 0; i < cont; i++) { // Itera entre todos los registrados
 		archivo << to_string(al[i].matricula) << ",";
@@ -487,8 +528,30 @@ void guardarARCH() {
 
 	// Al terminar se cierra (esto guarda el contenido)
 	archivo.close();
+
+	otravez();
 }
 
 void manual() {
-	cout << "AUN NADA";
+	ifstream read;
+	string line;
+
+	read.open("readme.md");
+	if (read.is_open()) {
+
+		while (!read.eof()) {
+
+			getline(read, line);
+			cout << line << endl;
+		}
+	}
+	else {
+		cout << "Archivo inexistente o problemas para abrirlo." << endl;
+
+	}
+
+	system("pause>nul");
+
+	read.close();
+	otravez();
 }
