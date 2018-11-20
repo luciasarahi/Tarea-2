@@ -58,14 +58,11 @@ En esta opción simplemente se desplegaran todos los registros con su informacio
 - Calificaciones: 
 - Promedio: 
 
-## 6.- Quiero guardar
-En esta area se guardan los datos obtenidos hasta ese momento.
-
-## 7.- Quiero consultar el manual
+## 6.- Quiero consultar el manual
 En esta opción se desplagara un archivo de lectura que le explicara al usuario como usar este programa.
 
-## 8.- Quiero salir
-Al elegir esta area se mostrará un mensaje de despedida y consecutivamente el programa se cerrara.
+## 7.- Quiero salir
+Al elegir esta area se mostrará un mensaje de despedida y consecutivamente el programa se cerrara. Al final se creara un archivo excel donde se podran ver toda la información que se registro.
 
 
 
