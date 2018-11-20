@@ -11,9 +11,8 @@ Al inciar el programa se mostrara un aviso de "El archivo no existe o hay proble
 3.- Quiero modificar a un alumno
 4.- Quiero eliminar a un alumno
 5.- Quiero que muestres los registros.
-6.- Quiero guardar.
-7.- Quiero consultar el manual.
-8.- Quiero salir.
+6.- Quiero consultar el manual.
+7.- Quiero salir.
 
 ```
 Dependiendo de lo que se desee hacer se presionara el numero correspondiente a la funcion que se quiera realizar.
